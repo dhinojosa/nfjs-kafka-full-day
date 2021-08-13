@@ -528,32 +528,34 @@ pre.pygments .tok-il { color: #666666 } /* Literal.Number.Integer.Long */
 <div class="sect1">
 <h2 id="_lab_architecture">Lab: Architecture</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p><strong>Step 1:</strong> Ensure that you have Java 8 installed</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Ensure that you have Java 8 or 11 (preferably) installed</p>
+</li>
+<li>
+<p>Download confluent open source from <a href="https://www.confluent.io/download/" class="bare">https://www.confluent.io/download/</a> and unzip the download to your home directory</p>
+</li>
+<li>
+<p>Go to the <code>confluent-6.x.x</code> directory and run, where <code>confluent-directory</code> is the folder where you unzipped the confluent stack</p>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="sh"><span></span>$ <span class="tok-nb">export</span> <span class="tok-nv">CONFLUENT_HOME</span> <span class="tok-o">=</span> &lt;confluent-directory&gt;
+$ ./confluent <span class="tok-nb">local</span> services start</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p><strong>Step 2:</strong> Download confluent open source from <a href="https://www.confluent.io/download/" class="bare">https://www.confluent.io/download/</a>
-and unzip the download to your home directory</p>
-</div>
-<div class="paragraph">
-<p><strong>Step 3:</strong> Go to the <code>confluent-6.x.x</code> directory and run:</p>
+<p>or on Windows</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="sh"><span></span>$ ./confluent <span class="tok-nb">local</span> services start</code></pre>
+<pre class="pygments highlight"><code data-lang="sh"><span></span>&gt; <span class="tok-nb">set</span> <span class="tok-nv">CONFLUENT_HOME</span> <span class="tok-o">=</span> &lt;confluent-directory&gt;
+&gt; .<span class="tok-se">\b</span>in<span class="tok-se">\c</span>onfluent <span class="tok-nb">local</span> services start</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>or</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="sh"><span></span>&gt; .<span class="tok-se">\b</span>in<span class="tok-se">\c</span>onfluent <span class="tok-nb">local</span> services start</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><strong>Step 4:</strong> Ensure that all service are running with the following messages:</p>
-</div>
+</li>
+<li>
+<p>Ensure that all service are running with the following messages:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="pygments highlight"><code data-lang="sh"><span></span>Starting zookeeper
@@ -572,74 +574,12 @@ Starting control-center
 control-center is <span class="tok-o">[</span>UP<span class="tok-o">]</span></code></pre>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_lab_command_line">Lab: Command-Line</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
+</li>
 <li>
-<p>Go to <code>confluent-6.x.x</code> folder and run <code>kafka-console-producer</code></p>
+<p>Clone <em>nfjs-kafka-full-day</em> repository from <a href="https://github.com/dhinojosa/nfjs-kafka-full-day" class="bare">https://github.com/dhinojosa/nfjs-kafka-full-day</a> with:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="sh"><span></span>./bin/kafka-console-producer <span class="tok-se">\</span>
---broker-list localhost:9092 <span class="tok-se">\</span>
---topic first_topic</code></pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-This will create a topic of 1 replica and 1 partition
-</td>
-</tr>
-</table>
-</div>
-</li>
-<li>
-<p>You will be provided a prompt. Using these prompts, enter a word and hit <strong>ENTER</strong>, add some more words and hit <strong>ENTER</strong></p>
-</li>
-<li>
-<p>In another terminal window or tab, run <code>kafka-console-consumer</code></p>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="sh"><span></span>./bin/kafka-console-consumer <span class="tok-se">\</span>
---bootstrap-server localhost:9092 <span class="tok-se">\</span>
---topic first_topic --from-beginning</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Ensure that the messages that you entered in the first terminal show up in the second</p>
-</li>
-<li>
-<p>Enter some more words in the producer, and view the messages in the terminal with the consumer</p>
-</li>
-<li>
-<p>Go to the documentation for <code>kafka-console-producer</code> and <code>kafka-console-consumer</code> and research how you can produce a key and value on the command line, and read that key and value on the consumer. You may need to shut down either <code>kafka-console-producer</code>, <code>kafka-console-consumer</code> or both with <strong>CTRL+C</strong> and try something different.</p>
-</li>
-<li>
-<p>Shut down <code>kafka-console-producer</code> and <code>kafka-console-consumer</code> using <strong>CTRL+C</strong></p>
-</li>
-</ol>
-</div>
-<div style="page-break-after: always;"></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_lab_writing_a_producer">Lab: Writing a Producer</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Step 1:</strong> Clone kafka-client repository from <a href="https://github.com/dhinojosa/kafka-client" class="bare">https://github.com/dhinojosa/kafka-client</a> with:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="sh"><span></span>git clone https://github.com/dhinojosa/kafka-client</code></pre>
+<pre class="pygments highlight"><code data-lang="sh"><span></span>git clone https://github.com/dhinojosa/nfjs-kafka-full-day</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -647,87 +587,122 @@ This will create a topic of 1 replica and 1 partition
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="sh"><span></span>git clone git@github.com:dhinojosa/kafka-client.git<span class="tok-sb">`</span></code></pre>
+<pre class="pygments highlight"><code data-lang="sh"><span></span>git clone git@github.com:dhinojosa/nfjs-kafka-full-day.git</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p><strong>Step 2:</strong> Run the following commands to ensure that you have these
-folders available other wise the build will fail:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="sh"><span></span>$ mkdir -p src/main/avro
-$ mkdir -p src/main/java
-$ mkdir -p src/test/java
-$ mkdir -p src/main/resources
-$ mkdir -p src/test/resources</code></pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-For Windows, remove the <code>-p</code>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p><strong>Step 3:</strong> Run the following command with Maven: <code>mvn clean compile</code>
-to ensure that dependencies are downloaded</p>
-</div>
-<div class="paragraph">
-<p><strong>Step 4:</strong> Create a topic called <code>my_orders</code> in Apache Kafka,
-with a replication factor of <code>1</code> and <code>3</code> partitions</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="sh"><span></span>$ ./kafka-topics --create --zookeeper localhost:2181 <span class="tok-se">\</span>
---replication-factor <span class="tok-m">1</span> --partitions <span class="tok-m">3</span> --topic my_orders</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><strong>Step 5:</strong> Create a producer called <code>MyProducer</code> inside of a package <code>com.xyzcorp</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Step 6:</strong> Create a <code>public static void main(String[] args)</code> application, and
-create a array of states in the United States, using the following <code>String</code></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-n">String</span> <span class="tok-n">stateString</span> <span class="tok-o">=</span>
-       <span class="tok-s">&quot;AK,AL,AZ,AR,CA,CO,CT,DE,FL,GA,&quot;</span> <span class="tok-o">+</span>
-       <span class="tok-s">&quot;HI,ID,IL,IN,IA,KS,KY,LA,ME,MD,&quot;</span> <span class="tok-o">+</span>
-       <span class="tok-s">&quot;MA,MI,MN,MS,MO,MT,NE,NV,NH,NJ,&quot;</span> <span class="tok-o">+</span>
-       <span class="tok-s">&quot;NM,NY,NC,ND,OH,OK,OR,PA,RI,SC,&quot;</span> <span class="tok-o">+</span>
-       <span class="tok-s">&quot;SD,TN,TX,UT,VT,VA,WA,WV,WI,WY&quot;</span><span class="tok-p">;</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><strong>Step 7:</strong> In the <code>main</code> method, create a loop of your choosing and <code>send</code> a message with a random state as the key,
- and a random value from 10 to 100000 for the cost of the total order using <code>java.util.Random.nextInt</code>.
- Using a <code>Future&lt;RecordMetadata&gt;</code> or <code>Callback</code> and print the metadata either using <code>System.out.println</code> or
- <code>System.out.format</code>, you can use a closure to enclose the key and value and print the content.</p>
-</div>
-<div class="paragraph">
-<p><strong>Step 8:</strong> Have a <code>Thread.sleep</code> with a random amount of time from 5 to 30 seconds
-using the same <code>java.util.Random</code> instance to represent some time
-between messages to mimic the real world</p>
-</div>
-<div class="paragraph">
-<p><strong>Step 9:</strong> Run in your IDE, or run in Maven using <code>mvn exec:java -Dexec.mainClass="com.xyzcorp.MyProducer"</code></p>
+<div style="page-break-after: always;"></div>
+</li>
+</ol>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_lab_writing_a_producer_continued">Lab: Writing a Producer (Continued)</h2>
+<h2 id="_lab_writing_a_producer">Lab: Writing a Producer</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p><strong>Step 10:</strong> Use <code>kafka-console-consumer</code> to consume message from <code>my_orders</code></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Run the following command with Maven: <code>mvn clean compile</code> to ensure that dependencies are downloaded</p>
+</li>
+<li>
+<p>Create a topic called <code>my_orders</code> in Apache Kafka, with a replication factor of <code>1</code> and <code>3</code> partitions</p>
+</li>
+<li>
+<p>Create a producer called <code>MyProducer</code> inside of a package <code>com.xyzcorp</code> with the following content:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kn">package</span> <span class="tok-nn">com.xyzcorp</span><span class="tok-p">;</span>
+
+<span class="tok-kn">import</span> <span class="tok-nn">org.apache.kafka.clients.producer.KafkaProducer</span><span class="tok-p">;</span>
+<span class="tok-kn">import</span> <span class="tok-nn">org.apache.kafka.clients.producer.ProducerConfig</span><span class="tok-p">;</span>
+<span class="tok-kn">import</span> <span class="tok-nn">org.apache.kafka.clients.producer.ProducerRecord</span><span class="tok-p">;</span>
+<span class="tok-kn">import</span> <span class="tok-nn">org.apache.kafka.common.serialization.IntegerSerializer</span><span class="tok-p">;</span>
+<span class="tok-kn">import</span> <span class="tok-nn">org.apache.kafka.common.serialization.StringSerializer</span><span class="tok-p">;</span>
+
+<span class="tok-kn">import</span> <span class="tok-nn">java.util.Arrays</span><span class="tok-p">;</span>
+<span class="tok-kn">import</span> <span class="tok-nn">java.util.Properties</span><span class="tok-p">;</span>
+<span class="tok-kn">import</span> <span class="tok-nn">java.util.Random</span><span class="tok-p">;</span>
+<span class="tok-kn">import</span> <span class="tok-nn">java.util.concurrent.atomic.AtomicBoolean</span><span class="tok-p">;</span>
+
+<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">MyProducer</span> <span class="tok-p">{</span>
+    <span class="tok-nd">@SuppressWarnings</span><span class="tok-p">(</span><span class="tok-s">&quot;Duplicates&quot;</span><span class="tok-p">)</span>
+    <span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">main</span><span class="tok-p">(</span><span class="tok-n">String</span><span class="tok-o">[]</span> <span class="tok-n">args</span><span class="tok-p">)</span> <span class="tok-kd">throws</span> <span class="tok-n">InterruptedException</span> <span class="tok-p">{</span>
+        <span class="tok-n">Properties</span> <span class="tok-n">properties</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">Properties</span><span class="tok-p">();</span>
+        <span class="tok-n">properties</span><span class="tok-p">.</span><span class="tok-na">put</span><span class="tok-p">(</span><span class="tok-n">ProducerConfig</span><span class="tok-p">.</span><span class="tok-na">BOOTSTRAP_SERVERS_CONFIG</span><span class="tok-p">,</span>
+            <span class="tok-s">&quot;localhost:9092&quot;</span><span class="tok-p">);</span>
+        <span class="tok-n">properties</span><span class="tok-p">.</span><span class="tok-na">put</span><span class="tok-p">(</span><span class="tok-n">ProducerConfig</span><span class="tok-p">.</span><span class="tok-na">KEY_SERIALIZER_CLASS_CONFIG</span><span class="tok-p">,</span>
+            <span class="tok-n">StringSerializer</span><span class="tok-p">.</span><span class="tok-na">class</span><span class="tok-p">);</span>
+        <span class="tok-n">properties</span><span class="tok-p">.</span><span class="tok-na">put</span><span class="tok-p">(</span><span class="tok-n">ProducerConfig</span><span class="tok-p">.</span><span class="tok-na">VALUE_SERIALIZER_CLASS_CONFIG</span><span class="tok-p">,</span>
+            <span class="tok-n">IntegerSerializer</span><span class="tok-p">.</span><span class="tok-na">class</span><span class="tok-p">);</span>
+
+        <span class="tok-n">KafkaProducer</span><span class="tok-o">&lt;</span><span class="tok-n">String</span><span class="tok-p">,</span> <span class="tok-n">Integer</span><span class="tok-o">&gt;</span> <span class="tok-n">producer</span> <span class="tok-o">=</span>
+            <span class="tok-k">new</span> <span class="tok-n">KafkaProducer</span><span class="tok-o">&lt;&gt;</span><span class="tok-p">(</span><span class="tok-n">properties</span><span class="tok-p">);</span>
+
+        <span class="tok-n">String</span> <span class="tok-n">stateString</span> <span class="tok-o">=</span>
+            <span class="tok-s">&quot;AK,AL,AZ,AR,CA,CO,CT,DE,FL,GA,&quot;</span> <span class="tok-o">+</span>
+                <span class="tok-s">&quot;HI,ID,IL,IN,IA,KS,KY,LA,ME,MD,&quot;</span> <span class="tok-o">+</span>
+                <span class="tok-s">&quot;MA,MI,MN,MS,MO,MT,NE,NV,NH,NJ,&quot;</span> <span class="tok-o">+</span>
+                <span class="tok-s">&quot;NM,NY,NC,ND,OH,OK,OR,PA,RI,SC,&quot;</span> <span class="tok-o">+</span>
+                <span class="tok-s">&quot;SD,TN,TX,UT,VT,VA,WA,WV,WI,WY&quot;</span><span class="tok-p">;</span>
+
+        <span class="tok-n">AtomicBoolean</span> <span class="tok-n">done</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">AtomicBoolean</span><span class="tok-p">(</span><span class="tok-kc">false</span><span class="tok-p">);</span>
+
+        <span class="tok-n">Runtime</span><span class="tok-p">.</span><span class="tok-na">getRuntime</span><span class="tok-p">().</span><span class="tok-na">addShutdownHook</span><span class="tok-p">(</span><span class="tok-k">new</span> <span class="tok-n">Thread</span><span class="tok-p">(()</span> <span class="tok-o">-&gt;</span> <span class="tok-p">{</span>
+            <span class="tok-n">done</span><span class="tok-p">.</span><span class="tok-na">set</span><span class="tok-p">(</span><span class="tok-kc">true</span><span class="tok-p">);</span>
+            <span class="tok-n">producer</span><span class="tok-p">.</span><span class="tok-na">flush</span><span class="tok-p">();</span>
+            <span class="tok-n">producer</span><span class="tok-p">.</span><span class="tok-na">close</span><span class="tok-p">();</span>
+        <span class="tok-p">}));</span>
+
+        <span class="tok-n">Random</span> <span class="tok-n">random</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">Random</span><span class="tok-p">();</span>
+
+        <span class="tok-k">while</span> <span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">done</span><span class="tok-p">.</span><span class="tok-na">get</span><span class="tok-p">())</span> <span class="tok-p">{</span>
+            <span class="tok-n">String</span><span class="tok-o">[]</span> <span class="tok-n">states</span> <span class="tok-o">=</span> <span class="tok-n">stateString</span><span class="tok-p">.</span><span class="tok-na">split</span><span class="tok-p">(</span><span class="tok-s">&quot;,&quot;</span><span class="tok-p">);</span>
+            <span class="tok-n">String</span> <span class="tok-n">state</span> <span class="tok-o">=</span> <span class="tok-n">states</span><span class="tok-o">[</span><span class="tok-n">random</span><span class="tok-p">.</span><span class="tok-na">nextInt</span><span class="tok-p">(</span><span class="tok-n">states</span><span class="tok-p">.</span><span class="tok-na">length</span><span class="tok-p">)</span><span class="tok-o">]</span><span class="tok-p">;</span>
+            <span class="tok-kt">int</span> <span class="tok-n">amount</span> <span class="tok-o">=</span> <span class="tok-n">random</span><span class="tok-p">.</span><span class="tok-na">nextInt</span><span class="tok-p">(</span><span class="tok-mi">100000</span> <span class="tok-o">-</span> <span class="tok-mi">50</span> <span class="tok-o">+</span> <span class="tok-mi">1</span><span class="tok-p">)</span> <span class="tok-o">+</span> <span class="tok-mi">50</span><span class="tok-p">;</span>
+
+            <span class="tok-n">ProducerRecord</span><span class="tok-o">&lt;</span><span class="tok-n">String</span><span class="tok-p">,</span> <span class="tok-n">Integer</span><span class="tok-o">&gt;</span> <span class="tok-n">producerRecord</span> <span class="tok-o">=</span>
+                <span class="tok-k">new</span> <span class="tok-n">ProducerRecord</span><span class="tok-o">&lt;&gt;</span><span class="tok-p">(</span><span class="tok-s">&quot;my_orders&quot;</span><span class="tok-p">,</span> <span class="tok-n">state</span><span class="tok-p">,</span> <span class="tok-n">amount</span><span class="tok-p">);</span>
+
+            <span class="tok-c1">//Asynchronous</span>
+            <span class="tok-n">producer</span><span class="tok-p">.</span><span class="tok-na">send</span><span class="tok-p">(</span><span class="tok-n">producerRecord</span><span class="tok-p">,</span> <span class="tok-p">(</span><span class="tok-n">metadata</span><span class="tok-p">,</span> <span class="tok-n">e</span><span class="tok-p">)</span> <span class="tok-o">-&gt;</span> <span class="tok-p">{</span>
+                <span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">metadata</span> <span class="tok-o">!=</span> <span class="tok-kc">null</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+                    <span class="tok-n">System</span><span class="tok-p">.</span><span class="tok-na">out</span><span class="tok-p">.</span><span class="tok-na">println</span><span class="tok-p">(</span><span class="tok-n">producerRecord</span><span class="tok-p">.</span><span class="tok-na">key</span><span class="tok-p">());</span>
+                    <span class="tok-n">System</span><span class="tok-p">.</span><span class="tok-na">out</span><span class="tok-p">.</span><span class="tok-na">println</span><span class="tok-p">(</span><span class="tok-n">producerRecord</span><span class="tok-p">.</span><span class="tok-na">value</span><span class="tok-p">());</span>
+
+                    <span class="tok-k">if</span> <span class="tok-p">(</span><span class="tok-n">metadata</span><span class="tok-p">.</span><span class="tok-na">hasOffset</span><span class="tok-p">())</span> <span class="tok-p">{</span>
+                        <span class="tok-n">System</span><span class="tok-p">.</span><span class="tok-na">out</span><span class="tok-p">.</span><span class="tok-na">format</span><span class="tok-p">(</span><span class="tok-s">&quot;offset: %d\n&quot;</span><span class="tok-p">,</span>
+                            <span class="tok-n">metadata</span><span class="tok-p">.</span><span class="tok-na">offset</span><span class="tok-p">());</span>
+                    <span class="tok-p">}</span>
+                    <span class="tok-n">System</span><span class="tok-p">.</span><span class="tok-na">out</span><span class="tok-p">.</span><span class="tok-na">format</span><span class="tok-p">(</span><span class="tok-s">&quot;partition: %d\n&quot;</span><span class="tok-p">,</span>
+                        <span class="tok-n">metadata</span><span class="tok-p">.</span><span class="tok-na">partition</span><span class="tok-p">());</span>
+                    <span class="tok-n">System</span><span class="tok-p">.</span><span class="tok-na">out</span><span class="tok-p">.</span><span class="tok-na">format</span><span class="tok-p">(</span><span class="tok-s">&quot;timestamp: %d\n&quot;</span><span class="tok-p">,</span>
+                        <span class="tok-n">metadata</span><span class="tok-p">.</span><span class="tok-na">timestamp</span><span class="tok-p">());</span>
+                    <span class="tok-n">System</span><span class="tok-p">.</span><span class="tok-na">out</span><span class="tok-p">.</span><span class="tok-na">format</span><span class="tok-p">(</span><span class="tok-s">&quot;topic: %s\n&quot;</span><span class="tok-p">,</span> <span class="tok-n">metadata</span><span class="tok-p">.</span><span class="tok-na">topic</span><span class="tok-p">());</span>
+                    <span class="tok-n">System</span><span class="tok-p">.</span><span class="tok-na">out</span><span class="tok-p">.</span><span class="tok-na">format</span><span class="tok-p">(</span><span class="tok-s">&quot;toString: %s\n&quot;</span><span class="tok-p">,</span>
+                        <span class="tok-n">metadata</span><span class="tok-p">.</span><span class="tok-na">toString</span><span class="tok-p">());</span>
+                <span class="tok-p">}</span> <span class="tok-k">else</span> <span class="tok-p">{</span>
+                    <span class="tok-n">System</span><span class="tok-p">.</span><span class="tok-na">out</span><span class="tok-p">.</span><span class="tok-na">println</span><span class="tok-p">(</span><span class="tok-s">&quot;ERROR! &quot;</span><span class="tok-p">);</span>
+                    <span class="tok-n">String</span> <span class="tok-n">firstException</span> <span class="tok-o">=</span>
+                        <span class="tok-n">Arrays</span><span class="tok-p">.</span><span class="tok-na">stream</span><span class="tok-p">(</span><span class="tok-n">e</span><span class="tok-p">.</span><span class="tok-na">getStackTrace</span><span class="tok-p">())</span>
+                              <span class="tok-p">.</span><span class="tok-na">findFirst</span><span class="tok-p">()</span>
+                              <span class="tok-p">.</span><span class="tok-na">map</span><span class="tok-p">(</span><span class="tok-n">StackTraceElement</span><span class="tok-p">::</span><span class="tok-n">toString</span><span class="tok-p">)</span>
+                              <span class="tok-p">.</span><span class="tok-na">orElse</span><span class="tok-p">(</span><span class="tok-s">&quot;Undefined Exception&quot;</span><span class="tok-p">);</span>
+                    <span class="tok-n">System</span><span class="tok-p">.</span><span class="tok-na">out</span><span class="tok-p">.</span><span class="tok-na">println</span><span class="tok-p">(</span><span class="tok-n">firstException</span><span class="tok-p">);</span>
+                <span class="tok-p">}</span>
+            <span class="tok-p">});</span>
+
+            <span class="tok-n">Thread</span><span class="tok-p">.</span><span class="tok-na">sleep</span><span class="tok-p">(</span><span class="tok-n">random</span><span class="tok-p">.</span><span class="tok-na">nextInt</span><span class="tok-p">(</span><span class="tok-mi">30000</span> <span class="tok-o">-</span> <span class="tok-mi">1000</span> <span class="tok-o">+</span> <span class="tok-mi">1</span><span class="tok-p">)</span> <span class="tok-o">+</span> <span class="tok-mi">1000</span><span class="tok-p">);</span>
+        <span class="tok-p">}</span>
+    <span class="tok-p">}</span>
+<span class="tok-p">}</span></code></pre>
 </div>
+</div>
+</li>
+<li>
+<p>Run in your IDE, or run in Maven using <code>mvn exec:java -Dexec.mainClass="com.xyzcorp.MyProducer"</code></p>
+</li>
+<li>
+<p>Use <code>kafka-console-consumer</code> within <code>confluent-5.0.0</code> to consume message from <code>my_orders</code></p>
 <div class="listingblock">
 <div class="content">
 <pre class="pygments highlight"><code data-lang="sh"><span></span>./bin/kafka-console-consumer <span class="tok-se">\</span>
@@ -739,323 +714,136 @@ between messages to mimic the real world</p>
   --property key.separator<span class="tok-o">=</span>,</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p><strong>Step 11:</strong> Stop the <code>kafka-console-consumer</code> instance and stop <code>MyProducer</code> with an interrupt</p>
+</li>
+<li>
+<p>Stop the <code>kafka-console-consumer</code> instance and stop <code>MyProducer</code> with an interrupt</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lab_add_acknowledgement">Lab: Add Acknowledgement</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the <code>MyProducer</code> class that you created, add acknowledgments and retries</p>
+</li>
+<li>
+<p>Rerun the <code>MyProducer</code>, you won&#8217;t notice much, but it does work</p>
+</li>
+</ol>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="./images/stop.png" alt="stop" width="15%" height="15%">
+<img src="./images/stop.png" alt="stop" width="20%" height="20%">
 </div>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_lab_writing_a_consumer">Lab: Writing a Consumer</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p><strong>Step 1:</strong> Create a consumer called <code>MyConsumer</code> inside of a package <code>com.xyzcorp</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Step 2:</strong> Create a <code>public static void main(String[] args)</code>
-in <code>MyConsumer</code> and create a single <code>Consumer</code> that listens to
-<code>my_orders</code> topic. Make your <code>group.id</code>, <code>my_group</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Step 3:</strong> Ensure that you listen to <strong>CTRL+C</strong> and shut down appropriately.</p>
-</div>
-<div class="paragraph">
-<p><strong>Step 4:</strong> Ensure that we start listening to the very beginning
-if there isn&#8217;t a valid offset.</p>
-</div>
-<div class="paragraph">
-<p><strong>Step 5:</strong> Run <code>MyProducer</code> from the previous lab</p>
-</div>
-<div class="paragraph">
-<p><strong>Step 6:</strong> Run <code>MyConsumer</code> in either your IDE or with Maven in the <em>kafka-client</em> folder
-using <code>mvn exec:java -Dexec.mainClass="com.xyzcorp.MyConsumer"</code> and view the results.</p>
-</div>
-<div class="paragraph">
-<p><strong>Step 7:</strong> Stop <code>MyConsumer</code> and start it again, why didn&#8217;t the previous information show? Stop the consumer.</p>
-</div>
-<div class="paragraph">
-<p><strong>Step 8:</strong> When calling <code>subscribe</code>, implement a
- <code>ConsumerRebalanceListener</code> that will print out when a
- partition is assigned to a consumer.</p>
-</div>
-<div class="paragraph">
-<p><strong>Step 9:</strong> Run the same application three times. Ask yourself and discuss why
-you&#8217;re running 3 separate instances. Review which partitions were assigned and
-revoked and for what reason.</p>
-</div>
-<div class="paragraph">
-<p><strong>Step 10:</strong> Stop a single consumer, show the assignments and revocations.</p>
-</div>
-<div class="paragraph">
-<p><strong>Step 11:</strong> Stop all consumers and producers</p>
-</div>
-<div style="page-break-after: always;"></div>
-</div>
-</div>
-<div class="sect1 slide_section">
-<h2 id="_lab_using_avro">Lab: Using Avro</h2>
-<div class="sectionbody">
-
-</div>
-</div>
-<div class="sect1">
-<h2 id="_lab_using_avro_2">Lab: Using Avro</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Step 1:</strong> In the <code>src/main/avro</code> folder create a schema for <code>Order</code> that includes the following fields:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Field Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Total</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Integer</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Shipping</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enumeration ("NEXT_DAY", "2_DAY", "GROUND")</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">State</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Discount</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Float</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Gender</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Union Type:<br>
-<code>null</code>
-Enumeration ("MALE", "FEMALE")<br></p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p><strong>Step 2:</strong> Ensure that you generate a class from the avro by invoking <code>mvn generate-sources</code>.
-Verify that the classes are created by looking in the <em>target/generated-sources</em> folder.</p>
-</div>
-<div class="paragraph">
-<p><strong>Step 3:</strong> Create a topic called <code>my_avro_orders</code> in Apache Kafka,
-with a replication factor of <code>1</code> and <code>3</code> partitions</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_lab_using_avro_continued">Lab: Using Avro (Continued)</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Step 4:</strong> Create a producer called <code>MyAvroProducer</code> inside the package
-of <code>com.xyzcorp</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Step 5:</strong> Create a <code>public static void main(String[] args)</code> application, and
-create a array of states in the United States, using the following <code>String</code></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-n">String</span> <span class="tok-n">stateString</span> <span class="tok-o">=</span>
-       <span class="tok-s">&quot;AK,AL,AZ,AR,CA,CO,CT,DE,FL,GA,&quot;</span> <span class="tok-o">+</span>
-       <span class="tok-s">&quot;HI,ID,IL,IN,IA,KS,KY,LA,ME,MD,&quot;</span> <span class="tok-o">+</span>
-       <span class="tok-s">&quot;MA,MI,MN,MS,MO,MT,NE,NV,NH,NJ,&quot;</span> <span class="tok-o">+</span>
-       <span class="tok-s">&quot;NM,NY,NC,ND,OH,OK,OR,PA,RI,SC,&quot;</span> <span class="tok-o">+</span>
-       <span class="tok-s">&quot;SD,TN,TX,UT,VT,VA,WA,WV,WI,WY&quot;</span><span class="tok-p">;</span></code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_lab_avro_continued">Lab: Avro (Continued)</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Step 6:</strong> In the <code>main</code> method, create a loop of your choosing like you did
-in the Producer lab, only this time, instantiate an <code>Order</code> and with a random value
-from <code>java.util.Random</code> create a total from 10 to 100000, a shipping selection, a state for field and key,
-a discount from 0 to .15 and a gender for <code>male</code> or <code>female</code>.</p>
-</div>
-<div class="paragraph">
-<p><strong>Step 7:</strong> Have a <code>Thread.sleep</code> with a random amount of time from 5 to 30 seconds
-using the same <code>java.util.Random</code> instance
-to represent some time between messages to mimic the real world</p>
-</div>
-<div class="paragraph">
-<p><strong>Step 8:</strong> Send information using a Schema Registry at <code>localhost:8081</code> for your <code>schema.registry.url</code> in your properties</p>
-</div>
-<div class="paragraph">
-<p><strong>Step 9:</strong> Run <code>MyAvroProducer</code> and ensure that the information is in
- the <code>my_avro_orders</code> topic using <code>kafka-avro-console-consumer</code></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="sh"><span></span>./kafka-avro-console-consumer <span class="tok-se">\</span>
---bootstrap-server localhost:9092 <span class="tok-se">\</span>
---topic my_avro_orders --from-beginning <span class="tok-se">\</span>
---key-deserializer <span class="tok-se">\</span>
-  org.apache.kafka.common.serialization.StringDeserializer <span class="tok-se">\</span>
- --property print.key<span class="tok-o">=</span><span class="tok-nb">true</span> <span class="tok-se">\</span>
- --property key.separator<span class="tok-o">=</span>, <span class="tok-se">\</span></code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_lab_avro_continued_2">Lab: Avro (Continued)</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Step 10:</strong> Copy <code>MyConsumer</code> that you wrote in a previous lab and name the copy <code>MyAvroConsumer</code>,
- and put it into group <code>my_avro_group</code>. Make sure you are listening to <code>my_avro_orders</code> topic.
- Also be sure to include <code>schema.registry.url</code>, <code>specific.avro.reader</code> and
- <code>KafkaAvroDeserializer</code> for the value deserializer.</p>
-</div>
-<div class="paragraph">
-<p><strong>Step 11:</strong> Run <code>MyAvroConsumer</code>, and ensure that the messages produced
-by <code>MyAvroProducer</code> are consumed by <code>MyAvroConsumer</code></p>
-</div>
-<div style="page-break-after: always;"></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_lab_writing_a_streams_application">Lab: Writing a Streams Application</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Step 1:</strong> Create a Streams application with the <code>application.id</code>
-named 'my_streams_app` in a class named <code>MyStreams</code> in the <code>com.xyzcorp</code>
- package.</p>
-</div>
-<div class="paragraph">
-<p><strong>Step 2:</strong> Have the <code>MyStreams</code> application attach to the <code>my_orders</code> topic and
-takes all information that has the key for your home state, or if
-you are out of the United States, choose a state that either you visited
-or would like to visit and put into another topic called <code>priority_state_orders</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Step 3:</strong> Turn on <code>MyProducer</code> and run <code>kafka_console_consumer</code> that
- listens to <code>priority_state_orders</code>. You may also want to shorten
- the sleep time so that more orders come in. It may be awhile
- before your state shows up.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="sh"><span></span>./bin/kafka-console-consumer <span class="tok-se">\</span>
-  --bootstrap-server localhost:9092 <span class="tok-se">\</span>
-  --topic priority_state_orders --from-beginning <span class="tok-se">\</span>
-  --key-deserializer org.apache.kafka.common.serialization.StringDeserializer <span class="tok-se">\</span>
-  --value-deserializer org.apache.kafka.common.serialization.IntegerDeserializer <span class="tok-se">\</span>
-  --property print.key<span class="tok-o">=</span><span class="tok-nb">true</span> <span class="tok-se">\</span>
-  --property key.separator<span class="tok-o">=</span>,</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><strong>Step 4:</strong> Bonus, extend your application to aggregate the total count of all orders
-per state using the same topology using a <code>KTable</code>. Convert the table to a <code>KStream</code>
-and send it to <code>state_orders_count</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Step 5:</strong> Run <code>kafka_console_consumer</code> that listens to <code>state_orders_count</code> and ensure
-that you are listening to the total.</p>
-</div>
-<div class="paragraph">
-<p><strong>Step 6:</strong> Run 3 different instances of the KafkaStreams application.</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a consumer called <code>MyConsumer</code> inside of a package <code>com.xyzcorp</code></p>
+</li>
+<li>
+<p>Create a <code>public static void main(String[] args)</code> in <code>MyConsumer</code> and create a single <code>Consumer</code> that listens to <code>my_orders</code> topic. Make your <code>group.id</code>, <code>my_group</code></p>
+</li>
+<li>
+<p>Ensure that you listen to <strong>CTRL+C</strong> and shut down appropriately, using an a shutdown hook</p>
+</li>
+<li>
+<p>Ensure that we start listening to the very beginning if there isn&#8217;t a valid offset.</p>
+</li>
+<li>
+<p>Run <code>MyProducer</code> from the previous lab</p>
+</li>
+<li>
+<p>Run <code>MyConsumer</code> in either your IDE or with Maven in the <em>kafka-client</em> folder using <code>mvn exec:java -Dexec.mainClass="com.xyzcorp.MyConsumer"</code> and view the results.</p>
+</li>
+<li>
+<p>Stop <code>MyConsumer</code> and start it again, why didn&#8217;t the previous information show? Stop the consumer.</p>
+</li>
+</ol>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="./images/stop.png" alt="stop" width="15%" height="15%">
+<img src="./images/stop.png" alt="stop" width="20%" height="20%">
 </div>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_lab_using_ksql">Lab: Using KSQL</h2>
+<h2 id="_lab_manual_commit_consumers">Lab: Manual Commit Consumers</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p><strong>Step 1:</strong> Run a ksql terminal that will attach to the KSQL Server using</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In your <code>Properties</code>, set <code>ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG</code> to <code>false</code></p>
+</li>
+<li>
+<p>Open <code>MyConsumer.java</code> and <strong>inside</strong> the <code>while</code> loop, perform a <code>commitAsync</code>, you don&#8217;t have to perform any operations inside the lambda if you wish not to</p>
+</li>
+<li>
+<p>Add a <code>commitSync</code> on the <code>cnsumer</code> outside of the <code>while</code> loop, when someone performs a <strong>CTRL+C</strong> with your shutdown hook</p>
+</li>
+<li>
+<p>Run <code>MyConsumer</code> to ensure it works`</p>
+</li>
+<li>
+<p>Stop <code>MyConsumer</code></p>
+</li>
+</ol>
 </div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/stop.png" alt="stop" width="20%" height="20%">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lab_consumer_rebalancing">Lab: Consumer Rebalancing</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Add a <code>ConsumerRebalanceListener</code> to <code>consumer.subscribe</code>. You can use the following method as a utility to print it out nicely</p>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="sh"><span></span>$ ksql http://localhost:8088</code></pre>
+<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kd">private</span> <span class="tok-kd">static</span> <span class="tok-n">String</span> <span class="tok-nf">collectionTopicPartitionToString</span>
+        <span class="tok-p">(</span><span class="tok-n">Collection</span><span class="tok-o">&lt;</span><span class="tok-n">TopicPartition</span><span class="tok-o">&gt;</span> <span class="tok-n">topicPartitions</span><span class="tok-p">)</span> <span class="tok-p">{</span>
+    <span class="tok-k">return</span> <span class="tok-n">topicPartitions</span><span class="tok-p">.</span><span class="tok-na">stream</span><span class="tok-p">()</span>
+                          <span class="tok-p">.</span><span class="tok-na">map</span><span class="tok-p">(</span><span class="tok-n">tp</span> <span class="tok-o">-&gt;</span> <span class="tok-n">tp</span><span class="tok-p">.</span><span class="tok-na">topic</span><span class="tok-p">()</span> <span class="tok-o">+</span> <span class="tok-s">&quot; - &quot;</span> <span class="tok-o">+</span> <span class="tok-n">tp</span><span class="tok-p">.</span><span class="tok-na">partition</span><span class="tok-p">())</span>
+                          <span class="tok-p">.</span><span class="tok-na">collect</span><span class="tok-p">(</span><span class="tok-n">Collectors</span><span class="tok-p">.</span><span class="tok-na">joining</span><span class="tok-p">(</span><span class="tok-s">&quot;,&quot;</span><span class="tok-p">));</span>
+<span class="tok-p">}</span></code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p><strong>Step 2:</strong> In the KSQL CLI, create an initial stream from the <code>my_avro_orders</code> topic using the following</p>
+</li>
+<li>
+<p>Run <code>MyConsumer</code> and ensure that it works</p>
+</li>
+<li>
+<p>Run <code>MyConsumer</code> three times, in three different terminals. Ask yourself and discuss why you’re running 3 separate instances.</p>
+</li>
+<li>
+<p>Run one more <code>MyConsumer</code> in a new terminal. Ask yourself what happened.</p>
+</li>
+<li>
+<p>Stop a single consumer, then two, and view the assignments and revocations.</p>
+</li>
+<li>
+<p>Stop all consumers and producers</p>
+</li>
+</ol>
 </div>
-<div class="listingblock">
+<div class="imageblock text-center">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="ksql"><span></span>CREATE STREAM my_avro_orders \
-(total BIGINT, shipping VARCHAR, state VARCHAR, discount DOUBLE, \
-gender VARCHAR) WITH (kafka_topic=&#39;my_avro_orders&#39;, value_format=&#39;AVRO&#39;);</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><strong>Step 3:</strong> Ensure that your stream is available when you call <code>SHOW STREAMS:</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Step 4:</strong> In KSQL, add <code>SET 'auto.offset.reset'='earliest';</code>
-so that you can start processing all information.</p>
-</div>
-<div class="paragraph">
-<p><strong>Step 5:</strong> Give ksql for a spin with a non-persistent query
-using <code>SELECT * from my_avro_orders;</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Step 6:</strong> Using KSQL, create another non-persistent query that selects
- all females from <code>my_avro_orders</code> from the state of Vermont</p>
-</div>
-<div class="paragraph">
-<p><strong>Step 7:</strong> Using KSQL, create a non-persistent query that selects
- all next day shipping orders and groups by state.</p>
-</div>
-<div class="paragraph">
-<p><strong>Step 8:</strong> Using KSQL, after you ensure that the non-persistent
- query above works, turn it into a persistent <em>table</em> query and persist the content into
- a topic called <code>next_day_shipping_by_state</code></p>
-</div>
-<div class="paragraph">
-<p><strong>Step 9:</strong> On a new terminal, enter the following at the command line in the <em>confluent-5.0.0</em>
-directory to view your results</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="sh"><span></span>./bin/kafka-avro-console-consumer <span class="tok-se">\</span>
-  --bootstrap-server localhost:9092 <span class="tok-se">\</span>
-  --topic next_day_shipping_by_state <span class="tok-se">\</span>
-  --from-beginning <span class="tok-se">\</span>
-  --key-deserializer org.apache.kafka.common.serialization.StringDeserializer <span class="tok-se">\</span>
-  --property print.key<span class="tok-o">=</span><span class="tok-nb">true</span> <span class="tok-se">\</span>
-  --property key.separator<span class="tok-o">=</span>,</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><strong>Step 10:</strong> Run <code>SHOW QUERIES</code> to display all the queries that running, find
- the query identifier for the persistent query you just ran, then call
- <code>TERMINATE</code> with the identifier.</p>
-</div>
-<div class="paragraph">
-<p><strong>Step 11:</strong> Exit ksql</p>
-</div>
-<div class="paragraph">
-<p><strong>Step 11:</strong> Stop all producers and consumers that are currently running</p>
-</div>
-<div class="paragraph">
-<p><strong>Step 12:</strong> Shut down all system processes by executing from the <code>confluent-5.0.0</code> folder:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="sh"><span></span>$ ./bin/confluent <span class="tok-nb">local</span> destroy</code></pre>
+<img src="./images/stop.png" alt="stop" width="20%" height="20%">
 </div>
 </div>
 </div>
@@ -1063,7 +851,7 @@ directory to view your results</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-08-21 13:43:37 -0600
+Last updated 2021-08-12 16:51:48 -0600
 </div>
 </div>
 </body>
