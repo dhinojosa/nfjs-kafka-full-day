@@ -512,84 +512,55 @@ pre.pygments .tok-vm { color: #19177C } /* Name.Variable.Magic */
 pre.pygments .tok-il { color: #666666 } /* Literal.Number.Integer.Long */
 </style>
 </head>
-<body class="article toc2 toc-left">
+<body class="article">
 <div id="header">
 <h1>Kafka Lab Book</h1>
 <div class="details">
 <span id="author" class="author">Daniel Hinojosa</span><br>
 </div>
-<div id="toc" class="toc2">
-<div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#_lab_architecture">Lab: Architecture</a></li>
-<li><a href="#_lab_writing_a_producer">Lab: Writing a Producer</a></li>
-<li><a href="#_lab_acks">Lab: Acks</a></li>
-<li><a href="#_lab_writing_a_consumer">Lab: Writing a Consumer</a></li>
-<li><a href="#_lab_writing_a_streams_application">Lab: Writing a Streams Application</a></li>
-<li><a href="#_lab_using_avro_and_ksql">Lab: Using Avro and KSQL</a></li>
-</ul>
-</div>
 </div>
 <div id="content">
-<div id="preamble">
-<div class="sectionbody">
-<div style="page-break-after: always;"></div>
-</div>
-</div>
 <div class="sect1">
-<h2 id="_lab_architecture">Lab: Architecture</h2>
+<h2 id="_getting_your_development_environment">Getting your Development Environment</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Ensure that you have Java 8 or 11 (preferably) installed</p>
+<p>Fork <em>nfjs-kafka-full-day</em> repository from <a href="https://github.com/dhinojosa/nfjs-kafka-full-day" class="bare" target="blank">https://github.com/dhinojosa/nfjs-kafka-full-day</a></p>
 </li>
 <li>
-<p>Download confluent open source from <a href="https://www.confluent.io/download/" class="bare">https://www.confluent.io/download/</a> and unzip the download to your home directory</p>
+<p>Using your new URL, in the address bar of your browser, insert <code>gitpod.io/</code> before <code>github.com</code>, for example, convert
+<code><a href="https://github.com/&lt;username&gt;/nfjs-kafka-full-day" class="bare">https://github.com/&lt;username&gt;/nfjs-kafka-full-day</a></code> to <code><a href="https://gitipod.io/github.com/&lt;username&gt;/nfjs-kafka-full-day" class="bare">https://gitipod.io/github.com/&lt;username&gt;/nfjs-kafka-full-day</a></code></p>
 </li>
 <li>
-<p>Go to the <code>confluent-6.x.x</code> directory and run, where <code>confluent-directory</code> is the folder where you unzipped the confluent stack</p>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="sh"><span></span>$ <span class="tok-nb">export</span> <span class="tok-nv">CONFLUENT_HOME</span> <span class="tok-o">=</span> &lt;confluent-directory&gt;
-$ ./confluent <span class="tok-nb">local</span> services start</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>or on Windows</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="sh"><span></span>&gt; <span class="tok-nb">set</span> <span class="tok-nv">CONFLUENT_HOME</span> <span class="tok-o">=</span> &lt;confluent-directory&gt;
-&gt; .<span class="tok-se">\b</span>in<span class="tok-se">\c</span>onfluent <span class="tok-nb">local</span> services start</code></pre>
-</div>
-</div>
+<p>This will take you to gitpod, a free virtual development environment (or least until the 50 hour limit per month is up)</p>
 </li>
 <li>
-<p>Ensure that all service are running with the following messages:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="sh"><span></span>Starting zookeeper
-zookeeper is <span class="tok-o">[</span>UP<span class="tok-o">]</span>
-Starting kafka
-kafka is <span class="tok-o">[</span>UP<span class="tok-o">]</span>
-Starting schema-registry
-schema-registry is <span class="tok-o">[</span>UP<span class="tok-o">]</span>
-Starting kafka-rest
-kafka-rest is <span class="tok-o">[</span>UP<span class="tok-o">]</span>
-Starting connect
-connect is <span class="tok-o">[</span>UP<span class="tok-o">]</span>
-Starting ksql-server
-ksql-server is <span class="tok-o">[</span>UP<span class="tok-o">]</span>
-Starting control-center
-control-center is <span class="tok-o">[</span>UP<span class="tok-o">]</span></code></pre>
-</div>
-</div>
+<p>Select Github, as the OAuth Provider so you can authenticate</p>
+</li>
+<li>
+<p>It will ask what IDE you would like to use, please select Visual Studio Code Web Browser</p>
+</li>
+<li>
+<p>When "Extension Pack for Java' extension is recommended for this repository. Do you want to install?", please do.</p>
+</li>
+<li>
+<p>When "Would you like to install and synchronize 'Extension Pack for Java' extension across your devices?" is prompted, please do.</p>
+</li>
+<li>
+<p>When "Cannot activate the 'Test Runner for Java' extension because it depends on the 'Language Support for Java&#8482; by Red Hat' extension, which is not installed.
+Would you like to install the extension and reload the window? Click Install and Reload", please do so</p>
+</li>
+<li>
+<p>Click on the extensions icon on the left, and install the "Docker" extension</p>
 <div class="imageblock text-center">
 <div class="content">
-<img src="./images/stop.png" alt="stop" width="15%" height="15%">
+<img src="./images/dockerextension.png" alt="dockerextension" width="20%" height="20%">
 </div>
 </div>
+</li>
+<li>
+<p>When the environment is ready, right-click on the <em>docker-compose.yml</em> and select "Compose Up"</p>
 </li>
 </ol>
 </div>
@@ -702,7 +673,7 @@ control-center is <span class="tok-o">[</span>UP<span class="tok-o">]</span></co
 <p>Run in your IDE, or run in Maven using <code>mvn exec:java -Dexec.mainClass="com.xyzcorp.MyProducer"</code></p>
 </li>
 <li>
-<p>Use <code>kafka-console-consumer</code> within <code>confluent-5.0.0</code> to consume message from <code>my_orders</code></p>
+<p>Use <code>kafka-console-consumer</code> within the <code>broker</code> container by going in the shell to consume message from <code>my_orders</code></p>
 <div class="listingblock">
 <div class="content">
 <pre class="pygments highlight"><code data-lang="sh"><span></span>./bin/kafka-console-consumer <span class="tok-se">\</span>
@@ -723,44 +694,21 @@ control-center is <span class="tok-o">[</span>UP<span class="tok-o">]</span></co
 </div>
 </div>
 <div class="sect1">
-<h2 id="_lab_acks">Lab: Acks</h2>
+<h2 id="_lab_add_acknowledgement">Lab: Add Acknowledgement</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>In <code>MyProducer</code> set <code>ACKS_CONFIG</code> to <code>all</code></p>
+<p>In the <code>MyProducer</code> class that you created, add acknowledgments and retries</p>
 </li>
 <li>
-<p>In <code>MyProducer</code> set <code>RETRIES_CONFIG</code> to <code>20</code></p>
-</li>
-<li>
-<p>In <code>MyProducer</code> set <code>RETRY_BACKOFF_MS_CONFIG</code> to <code>3000</code></p>
-</li>
-<li>
-<p>Run in your IDE, or run in Maven using <code>mvn exec:java -Dexec.mainClass="com.xyzcorp.MyProducer"</code></p>
-</li>
-<li>
-<p>Use <code>kafka-console-consumer</code> to consume message from <code>my_orders</code>, you should not see too much difference, but know that there acknowledgments are happening</p>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="sh"><span></span>./bin/kafka-console-consumer <span class="tok-se">\</span>
-  --bootstrap-server localhost:9092 <span class="tok-se">\</span>
-  --topic my_orders --from-beginning <span class="tok-se">\</span>
-  --key-deserializer org.apache.kafka.common.serialization.StringDeserializer <span class="tok-se">\</span>
-  --value-deserializer org.apache.kafka.common.serialization.IntegerDeserializer <span class="tok-se">\</span>
-  --property print.key<span class="tok-o">=</span><span class="tok-nb">true</span> <span class="tok-se">\</span>
-  --property key.separator<span class="tok-o">=</span>,</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Stop the <code>kafka-console-consumer</code> instance and stop <code>MyProducer</code> with an interrupt</p>
+<p>Rerun the <code>MyProducer</code>, you won&#8217;t notice much, but it does work</p>
 </li>
 </ol>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="./images/stop.png" alt="stop" width="15%" height="15%">
+<img src="./images/stop.png" alt="stop" width="20%" height="20%">
 </div>
 </div>
 <div style="page-break-after: always;"></div>
@@ -893,121 +841,40 @@ revoked and for what reason.</p>
 <img src="./images/stop.png" alt="stop" width="15%" height="15%">
 </div>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_lab_writing_a_streams_application">Lab: Writing a Streams Application</h2>
+<h2 id="_lab_manual_commit_consumers">Lab: Manual Commit Consumers</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Create a Streams application in a class named <code>MyStreams</code> in the <code>com.xyzcorp</code>
-package with the following content</p>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kn">package</span> <span class="tok-nn">com.xyzcorp</span><span class="tok-p">;</span>
-
-<span class="tok-kn">import</span> <span class="tok-nn">org.apache.kafka.common.serialization.Serdes</span><span class="tok-p">;</span>
-<span class="tok-kn">import</span> <span class="tok-nn">org.apache.kafka.streams.</span><span class="tok-o">&lt;</span><span class="tok-n">strong</span><span class="tok-o">&gt;</span><span class="tok-p">;</span>
-<span class="tok-kn">import</span> <span class="tok-nn">org.apache.kafka.streams.kstream.</span><span class="tok-o">&lt;/</span><span class="tok-n">strong</span><span class="tok-o">&gt;</span><span class="tok-p">;</span>
-
-<span class="tok-kn">import</span> <span class="tok-nn">java.time.Duration</span><span class="tok-p">;</span>
-<span class="tok-kn">import</span> <span class="tok-nn">java.time.temporal.ChronoUnit</span><span class="tok-p">;</span>
-<span class="tok-kn">import</span> <span class="tok-nn">java.time.temporal.TemporalUnit</span><span class="tok-p">;</span>
-<span class="tok-kn">import</span> <span class="tok-nn">java.util.Properties</span><span class="tok-p">;</span>
-
-<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">MyStreams</span> <span class="tok-p">{</span>
-    <span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">main</span><span class="tok-p">(</span><span class="tok-n">String</span><span class="tok-o">[]</span> <span class="tok-n">args</span><span class="tok-p">)</span> <span class="tok-p">{</span>
-        <span class="tok-n">Properties</span> <span class="tok-n">props</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">Properties</span><span class="tok-p">();</span>
-
-        <span class="tok-n">props</span><span class="tok-p">.</span><span class="tok-na">put</span><span class="tok-p">(</span><span class="tok-n">StreamsConfig</span><span class="tok-p">.</span><span class="tok-na">APPLICATION_ID_CONFIG</span><span class="tok-p">,</span>
-            <span class="tok-s">&quot;my_group&quot;</span><span class="tok-p">);</span>
-        <span class="tok-n">props</span><span class="tok-p">.</span><span class="tok-na">put</span><span class="tok-p">(</span><span class="tok-n">StreamsConfig</span><span class="tok-p">.</span><span class="tok-na">BOOTSTRAP_SERVERS_CONFIG</span><span class="tok-p">,</span>
-            <span class="tok-s">&quot;localhost:9092&quot;</span><span class="tok-p">);</span>
-        <span class="tok-n">props</span><span class="tok-p">.</span><span class="tok-na">put</span><span class="tok-p">(</span><span class="tok-n">StreamsConfig</span><span class="tok-p">.</span><span class="tok-na">DEFAULT_KEY_SERDE_CLASS_CONFIG</span><span class="tok-p">,</span>
-            <span class="tok-n">Serdes</span><span class="tok-p">.</span><span class="tok-na">String</span><span class="tok-p">().</span><span class="tok-na">getClass</span><span class="tok-p">());</span>
-        <span class="tok-n">props</span><span class="tok-p">.</span><span class="tok-na">put</span><span class="tok-p">(</span><span class="tok-n">StreamsConfig</span><span class="tok-p">.</span><span class="tok-na">DEFAULT_VALUE_SERDE_CLASS_CONFIG</span><span class="tok-p">,</span>
-            <span class="tok-n">Serdes</span><span class="tok-p">.</span><span class="tok-na">Integer</span><span class="tok-p">().</span><span class="tok-na">getClass</span><span class="tok-p">());</span>
-
-        <span class="tok-n">StreamsBuilder</span> <span class="tok-n">builder</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">StreamsBuilder</span><span class="tok-p">();</span>
-
-        <span class="tok-n">KStream</span><span class="tok-o">&lt;</span><span class="tok-n">String</span><span class="tok-p">,</span> <span class="tok-n">Integer</span><span class="tok-o">&gt;</span> <span class="tok-n">stream</span> <span class="tok-o">=</span>
-            <span class="tok-n">builder</span><span class="tok-p">.</span><span class="tok-na">stream</span><span class="tok-p">(</span><span class="tok-s">&quot;my_orders&quot;</span><span class="tok-p">);</span> <span class="tok-c1">//Key: State, Value: Amount</span>
-
-        <span class="tok-c1">//One branch</span>
-        <span class="tok-n">stream</span><span class="tok-p">.</span><span class="tok-na">filter</span><span class="tok-p">((</span><span class="tok-n">key</span><span class="tok-p">,</span> <span class="tok-n">value</span><span class="tok-p">)</span> <span class="tok-o">-&gt;</span> <span class="tok-n">key</span><span class="tok-p">.</span><span class="tok-na">equals</span><span class="tok-p">(</span><span class="tok-s">&quot;CA&quot;</span><span class="tok-p">))</span>
-              <span class="tok-p">.</span><span class="tok-na">to</span><span class="tok-p">(</span><span class="tok-s">&quot;priority_state_orders&quot;</span><span class="tok-p">);</span>
-
-        <span class="tok-c1">//Second branch</span>
-        <span class="tok-n">stream</span><span class="tok-p">.</span><span class="tok-na">groupByKey</span><span class="tok-p">()</span>
-              <span class="tok-p">.</span><span class="tok-na">count</span><span class="tok-p">()</span>
-              <span class="tok-p">.</span><span class="tok-na">toStream</span><span class="tok-p">()</span>
-              <span class="tok-p">.</span><span class="tok-na">peek</span><span class="tok-p">((</span><span class="tok-n">key</span><span class="tok-p">,</span> <span class="tok-n">value</span><span class="tok-p">)</span> <span class="tok-o">-&gt;</span>
-                  <span class="tok-n">System</span><span class="tok-p">.</span><span class="tok-na">out</span><span class="tok-p">.</span><span class="tok-na">printf</span><span class="tok-p">(</span><span class="tok-s">&quot;key: %s, value %d&quot;</span><span class="tok-p">,</span> <span class="tok-n">key</span><span class="tok-p">,</span> <span class="tok-n">value</span><span class="tok-p">))</span>
-              <span class="tok-p">.</span><span class="tok-na">to</span><span class="tok-p">(</span><span class="tok-s">&quot;state_orders_count&quot;</span><span class="tok-p">,</span>
-                  <span class="tok-n">Produced</span><span class="tok-p">.</span><span class="tok-na">with</span><span class="tok-p">(</span><span class="tok-n">Serdes</span><span class="tok-p">.</span><span class="tok-na">String</span><span class="tok-p">(),</span> <span class="tok-n">Serdes</span><span class="tok-p">.</span><span class="tok-na">Long</span><span class="tok-p">()));</span>
-
-
-        <span class="tok-n">Topology</span> <span class="tok-n">topology</span> <span class="tok-o">=</span> <span class="tok-n">builder</span><span class="tok-p">.</span><span class="tok-na">build</span><span class="tok-p">();</span>
-
-        <span class="tok-n">KafkaStreams</span> <span class="tok-n">streams</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">KafkaStreams</span><span class="tok-p">(</span><span class="tok-n">topology</span><span class="tok-p">,</span> <span class="tok-n">props</span><span class="tok-p">);</span>
-
-        <span class="tok-n">streams</span><span class="tok-p">.</span><span class="tok-na">setUncaughtExceptionHandler</span><span class="tok-p">((</span><span class="tok-n">t</span><span class="tok-p">,</span> <span class="tok-n">e</span><span class="tok-p">)</span> <span class="tok-o">-&gt;</span> <span class="tok-n">e</span><span class="tok-p">.</span><span class="tok-na">printStackTrace</span><span class="tok-p">());</span>
-
-        <span class="tok-n">streams</span><span class="tok-p">.</span><span class="tok-na">start</span><span class="tok-p">();</span>
-
-        <span class="tok-n">Runtime</span><span class="tok-p">.</span><span class="tok-na">getRuntime</span><span class="tok-p">().</span><span class="tok-na">addShutdownHook</span><span class="tok-p">(</span><span class="tok-k">new</span> <span class="tok-n">Thread</span><span class="tok-p">(</span><span class="tok-n">streams</span><span class="tok-p">::</span><span class="tok-n">close</span><span class="tok-p">));</span>
-    <span class="tok-p">}</span>
-<span class="tok-p">}</span></code></pre>
-</div>
-</div>
+<p>In your <code>Properties</code>, set <code>ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG</code> to <code>false</code></p>
 </li>
 <li>
-<p>Run in your IDE, or run in Maven using <code>mvn exec:java -Dexec.mainClass="com.xyzcorp.MyStreams"</code></p>
+<p>Open <code>MyConsumer.java</code> and <strong>inside</strong> the <code>while</code> loop, perform a <code>commitAsync</code>, you don&#8217;t have to perform any operations inside the lambda if you wish not to</p>
 </li>
 <li>
-<p>Run <code>MyProducer</code> and run <code>kafka_console_consumer</code> that
-listens to <code>priority_state_orders</code>. You may also want to shorten
-the sleep time so that more orders come in.</p>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="sh"><span></span>./bin/kafka-console-consumer <span class="tok-se">\</span>
-  --bootstrap-server localhost:9092 <span class="tok-se">\</span>
-  --topic priority_state_orders --from-beginning <span class="tok-se">\</span>
-  --key-deserializer org.apache.kafka.common.serialization.StringDeserializer <span class="tok-se">\</span>
-  --value-deserializer org.apache.kafka.common.serialization.IntegerDeserializer <span class="tok-se">\</span>
-  --property print.key<span class="tok-o">=</span><span class="tok-nb">true</span> <span class="tok-se">\</span>
-  --property key.separator<span class="tok-o">=</span>,</code></pre>
-</div>
-</div>
+<p>Add a <code>commitSync</code> on the <code>consumer</code> outside of the <code>while</code> loop, when someone performs a <strong>CTRL+C</strong> with your shutdown hook</p>
 </li>
 <li>
-<p>Run <code>kafka_console_consumer</code> that listens to <code>state_orders_count</code></p>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight"><code data-lang="sh"><span></span>./bin/kafka-console-consumer <span class="tok-se">\</span>
---bootstrap-server localhost:9092 <span class="tok-se">\</span>
-  --topic state_orders_count --from-beginning <span class="tok-se">\</span>
-  --key-deserializer org.apache.kafka.common.serialization.StringDeserializer <span class="tok-se">\</span>
-  --value-deserializer org.apache.kafka.common.serialization.LongDeserializer <span class="tok-se">\</span>
-  --property print.key<span class="tok-o">=</span><span class="tok-nb">true</span> <span class="tok-se">\</span>
-  --property key.separator<span class="tok-o">=</span>,</code></pre>
-</div>
+<p>Run <code>MyConsumer</code> to ensure it works`</p>
+</li>
+<li>
+<p>Stop <code>MyConsumer</code></p>
+</li>
+</ol>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="./images/stop.png" alt="stop" width="15%" height="15%">
+<img src="./images/stop.png" alt="stop" width="20%" height="20%">
 </div>
-</div>
-</li>
-</ol>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_lab_using_avro_and_ksql">Lab: Using Avro and KSQL</h2>
+<h2 id="_lab_using_avro">Lab: Using Avro</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -1161,13 +1028,47 @@ of <code>com.xyzcorp</code> with the following content</p>
 </div>
 </li>
 <li>
-<p>Run a ksql terminal that will attach to the KSQL Server using</p>
+<p>Run <code>MyAvroProducer</code> and ensure that the information is in
+the <code>my_avro_orders</code> topic using <code>kafka-avro-console-consumer</code> resident in the <code>broker</code> container</p>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="sh"><span></span>$ ksql http://localhost:8088</code></pre>
+<pre class="pygments highlight"><code data-lang="sh"><span></span>./kafka-avro-console-consumer <span class="tok-se">\</span>
+--bootstrap-server localhost:9092 <span class="tok-se">\</span>
+--topic my_avro_orders --from-beginning <span class="tok-se">\</span>
+--key-deserializer <span class="tok-se">\</span>
+  org.apache.kafka.common.serialization.StringDeserializer <span class="tok-se">\</span>
+ --property print.key<span class="tok-o">=</span><span class="tok-nb">true</span> <span class="tok-se">\</span>
+ --property key.separator<span class="tok-o">=</span>, <span class="tok-se">\</span></code></pre>
 </div>
 </div>
 </li>
+</ol>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/stop.png" alt="stop" width="20%" height="20%">
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lab_using_ksql">Lab: Using KSQL</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Enter the shell of the <code>ksqldb-cli</code>. Run a ksql terminal that will attach to the KSQL Server using</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ ksql http://ksqldb-server:8088</pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>In the KSQL CLI, create an initial stream from the <code>my_avro_orders</code> topic using the following</p>
 <div class="listingblock">
@@ -1203,7 +1104,7 @@ query above works, turn it into a persistent <em>table</em> query and persist th
 a topic called <code>next_day_shipping_by_state</code></p>
 </li>
 <li>
-<p>On a new terminal, enter the following at the command line in the <em>confluent-6.x.x</em>
+<p>On a new terminal, enter the following at the command line in the <em>confluent-5.0.0</em>
 directory to view your results</p>
 <div class="listingblock">
 <div class="content">
@@ -1225,18 +1126,11 @@ the query identifier for the persistent query you just ran, then call
 <li>
 <p>Exit ksql</p>
 </li>
-<li>
-<p>Stop all producers and consumers that are currently running</p>
-</li>
-<li>
-<p>Shut down all system processes by executing from the <code>confluent-6.x.x</code> folder:</p>
-</li>
 </ol>
 </div>
-<div class="listingblock">
+<div class="imageblock text-center">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="sh"><span></span>$ ./bin/confluent <span class="tok-nb">local</span> services stop
-$ ./bin/confluent <span class="tok-nb">local</span> destroy</code></pre>
+<img src="./images/stop.png" alt="stop" width="20%" height="20%">
 </div>
 </div>
 </div>
@@ -1244,7 +1138,7 @@ $ ./bin/confluent <span class="tok-nb">local</span> destroy</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-08-13 06:47:06 -0600
+Last updated 2022-11-15 08:02:37 -0700
 </div>
 </div>
 </body>
