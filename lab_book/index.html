@@ -981,50 +981,50 @@ the sleep time so that more orders come in.</p>
 <p>Add the following content in <em>Order.avsc</em>, discuss or think about how this would look as a Java class</p>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-p">{</span>
-  <span class="tok-s">&quot;type&quot;</span><span class="tok-p">:</span> <span class="tok-s">&quot;record&quot;</span><span class="tok-p">,</span>
-  <span class="tok-s">&quot;namespace&quot;</span><span class="tok-p">:</span> <span class="tok-s">&quot;com.xyzcorp&quot;</span><span class="tok-p">,</span>
-  <span class="tok-s">&quot;name&quot;</span><span class="tok-p">:</span> <span class="tok-s">&quot;Order&quot;</span><span class="tok-p">,</span>
-  <span class="tok-s">&quot;fields&quot;</span><span class="tok-p">:</span> <span class="tok-o">[</span>
+<pre class="pygments highlight"><code data-lang="json"><span></span><span class="tok-p">{</span>
+  <span class="tok-nt">&quot;type&quot;</span><span class="tok-p">:</span> <span class="tok-s2">&quot;record&quot;</span><span class="tok-p">,</span>
+  <span class="tok-nt">&quot;namespace&quot;</span><span class="tok-p">:</span> <span class="tok-s2">&quot;com.xyzcorp&quot;</span><span class="tok-p">,</span>
+  <span class="tok-nt">&quot;name&quot;</span><span class="tok-p">:</span> <span class="tok-s2">&quot;Order&quot;</span><span class="tok-p">,</span>
+  <span class="tok-nt">&quot;fields&quot;</span><span class="tok-p">:</span> <span class="tok-p">[</span>
     <span class="tok-p">{</span>
-      <span class="tok-s">&quot;type&quot;</span><span class="tok-p">:</span> <span class="tok-s">&quot;int&quot;</span><span class="tok-p">,</span>
-      <span class="tok-s">&quot;name&quot;</span><span class="tok-p">:</span> <span class="tok-s">&quot;total&quot;</span>
+      <span class="tok-nt">&quot;type&quot;</span><span class="tok-p">:</span> <span class="tok-s2">&quot;int&quot;</span><span class="tok-p">,</span>
+      <span class="tok-nt">&quot;name&quot;</span><span class="tok-p">:</span> <span class="tok-s2">&quot;total&quot;</span>
     <span class="tok-p">},</span>
     <span class="tok-p">{</span>
-      <span class="tok-s">&quot;name&quot;</span><span class="tok-p">:</span> <span class="tok-s">&quot;shipping&quot;</span><span class="tok-p">,</span>
-      <span class="tok-s">&quot;type&quot;</span><span class="tok-p">:</span> <span class="tok-p">{</span>
-        <span class="tok-s">&quot;name&quot;</span><span class="tok-p">:</span> <span class="tok-s">&quot;Shipping&quot;</span><span class="tok-p">,</span>
-        <span class="tok-s">&quot;type&quot;</span><span class="tok-p">:</span> <span class="tok-s">&quot;enum&quot;</span><span class="tok-p">,</span>
-        <span class="tok-s">&quot;symbols&quot;</span><span class="tok-p">:</span> <span class="tok-o">[</span>
-          <span class="tok-s">&quot;NEXT_DAY&quot;</span><span class="tok-p">,</span>
-          <span class="tok-s">&quot;TWO_DAY&quot;</span><span class="tok-p">,</span>
-          <span class="tok-s">&quot;GROUND&quot;</span>
-        <span class="tok-o">]</span>
+      <span class="tok-nt">&quot;name&quot;</span><span class="tok-p">:</span> <span class="tok-s2">&quot;shipping&quot;</span><span class="tok-p">,</span>
+      <span class="tok-nt">&quot;type&quot;</span><span class="tok-p">:</span> <span class="tok-p">{</span>
+        <span class="tok-nt">&quot;name&quot;</span><span class="tok-p">:</span> <span class="tok-s2">&quot;Shipping&quot;</span><span class="tok-p">,</span>
+        <span class="tok-nt">&quot;type&quot;</span><span class="tok-p">:</span> <span class="tok-s2">&quot;enum&quot;</span><span class="tok-p">,</span>
+        <span class="tok-nt">&quot;symbols&quot;</span><span class="tok-p">:</span> <span class="tok-p">[</span>
+          <span class="tok-s2">&quot;NEXT_DAY&quot;</span><span class="tok-p">,</span>
+          <span class="tok-s2">&quot;TWO_DAY&quot;</span><span class="tok-p">,</span>
+          <span class="tok-s2">&quot;GROUND&quot;</span>
+        <span class="tok-p">]</span>
       <span class="tok-p">}</span>
     <span class="tok-p">},</span>
     <span class="tok-p">{</span>
-      <span class="tok-s">&quot;type&quot;</span><span class="tok-p">:</span> <span class="tok-s">&quot;string&quot;</span><span class="tok-p">,</span>
-      <span class="tok-s">&quot;name&quot;</span><span class="tok-p">:</span> <span class="tok-s">&quot;state&quot;</span>
+      <span class="tok-nt">&quot;type&quot;</span><span class="tok-p">:</span> <span class="tok-s2">&quot;string&quot;</span><span class="tok-p">,</span>
+      <span class="tok-nt">&quot;name&quot;</span><span class="tok-p">:</span> <span class="tok-s2">&quot;state&quot;</span>
     <span class="tok-p">},</span>
     <span class="tok-p">{</span>
-      <span class="tok-s">&quot;type&quot;</span><span class="tok-p">:</span> <span class="tok-s">&quot;float&quot;</span><span class="tok-p">,</span>
-      <span class="tok-s">&quot;name&quot;</span><span class="tok-p">:</span> <span class="tok-s">&quot;discount&quot;</span>
+      <span class="tok-nt">&quot;type&quot;</span><span class="tok-p">:</span> <span class="tok-s2">&quot;float&quot;</span><span class="tok-p">,</span>
+      <span class="tok-nt">&quot;name&quot;</span><span class="tok-p">:</span> <span class="tok-s2">&quot;discount&quot;</span>
     <span class="tok-p">},</span>
     <span class="tok-p">{</span>
-      <span class="tok-s">&quot;type&quot;</span><span class="tok-p">:</span> <span class="tok-o">[</span>
-        <span class="tok-s">&quot;null&quot;</span><span class="tok-p">,</span>
+      <span class="tok-nt">&quot;type&quot;</span><span class="tok-p">:</span> <span class="tok-p">[</span>
+        <span class="tok-s2">&quot;null&quot;</span><span class="tok-p">,</span>
         <span class="tok-p">{</span>
-          <span class="tok-s">&quot;type&quot;</span><span class="tok-p">:</span> <span class="tok-s">&quot;enum&quot;</span><span class="tok-p">,</span>
-          <span class="tok-s">&quot;name&quot;</span><span class="tok-p">:</span> <span class="tok-s">&quot;Gender&quot;</span><span class="tok-p">,</span>
-          <span class="tok-s">&quot;symbols&quot;</span><span class="tok-p">:</span> <span class="tok-o">[</span>
-            <span class="tok-s">&quot;MALE&quot;</span><span class="tok-p">,</span>
-            <span class="tok-s">&quot;FEMALE&quot;</span>
-          <span class="tok-o">]</span>
+          <span class="tok-nt">&quot;type&quot;</span><span class="tok-p">:</span> <span class="tok-s2">&quot;enum&quot;</span><span class="tok-p">,</span>
+          <span class="tok-nt">&quot;name&quot;</span><span class="tok-p">:</span> <span class="tok-s2">&quot;Gender&quot;</span><span class="tok-p">,</span>
+          <span class="tok-nt">&quot;symbols&quot;</span><span class="tok-p">:</span> <span class="tok-p">[</span>
+            <span class="tok-s2">&quot;MALE&quot;</span><span class="tok-p">,</span>
+            <span class="tok-s2">&quot;FEMALE&quot;</span>
+          <span class="tok-p">]</span>
         <span class="tok-p">}</span>
-      <span class="tok-o">]</span><span class="tok-p">,</span>
-      <span class="tok-s">&quot;name&quot;</span><span class="tok-p">:</span> <span class="tok-s">&quot;gender&quot;</span>
+      <span class="tok-p">],</span>
+      <span class="tok-nt">&quot;name&quot;</span><span class="tok-p">:</span> <span class="tok-s2">&quot;gender&quot;</span>
     <span class="tok-p">}</span>
-  <span class="tok-o">]</span>
+  <span class="tok-p">]</span>
 <span class="tok-p">}</span></code></pre>
 </div>
 </div>
