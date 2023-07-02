@@ -539,32 +539,19 @@ pre.pygments .tok-il { color: #666666 } /* Literal.Number.Integer.Long */
 <p>Select Github, as the OAuth Provider so you can authenticate</p>
 </li>
 <li>
-<p>It will ask what IDE you would like to use, please select Visual Studio Code Web Browser</p>
+<p>It will ask what IDE you would like to use, please select Visual Studio Code <strong>Web Browser</strong></p>
 </li>
 <li>
-<p>When "Extension Pack for Java' extension is recommended for this repository. Do you want to install?", please do.</p>
-</li>
-<li>
-<p>When "Would you like to install and synchronize 'Extension Pack for Java' extension across your devices?" is prompted, please do.</p>
-</li>
-<li>
-<p>When "Cannot activate the 'Test Runner for Java' extension because it depends on the 'Language Support for Java&#8482; by Red Hat' extension, which is not installed.
-Would you like to install the extension and reload the window? Click Install and Reload", please do so</p>
-</li>
-<li>
-<p>Click on the extensions icon on the left, and install the "Docker" extension</p>
-<div class="imageblock text-center">
+<p>When the environment is ready, right-click on the <em>docker-compose.yml</em> and select "Compose Up - Select Services", choose <em>web</em> and <em>control-center</em></p>
+<div class="imageblock">
 <div class="content">
-<img src="./images/dockerextension.png" alt="dockerextension" width="20%" height="20%">
+<img src="./images/control-center-web.png" alt="control center web">
 </div>
 </div>
-</li>
-<li>
-<p>When the environment is ready, right-click on the <em>docker-compose.yml</em> and select "Compose Up"</p>
+<div style="page-break-after: always;"></div>
 </li>
 </ol>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 </div>
 <div class="sect1">
@@ -882,60 +869,60 @@ revoked and for what reason.</p>
 package with the following content</p>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kn">package</span> <span class="tok-nn">com.xyzcorp</span><span class="tok-p">;</span>
+<pre class="pygments highlight"><code data-lang="java">package com.xyzcorp;
 
-<span class="tok-kn">import</span> <span class="tok-nn">org.apache.kafka.common.serialization.Serdes</span><span class="tok-p">;</span>
-<span class="tok-kn">import</span> <span class="tok-nn">org.apache.kafka.streams.</span><span class="tok-o">&lt;</span><span class="tok-n">strong</span><span class="tok-o">&gt;</span><span class="tok-p">;</span>
-<span class="tok-kn">import</span> <span class="tok-nn">org.apache.kafka.streams.kstream.</span><span class="tok-o">&lt;/</span><span class="tok-n">strong</span><span class="tok-o">&gt;</span><span class="tok-p">;</span>
+import org.apache.kafka.common.serialization.Serdes;
+import org.apache.kafka.streams.*;
+import org.apache.kafka.streams.kstream.*;
 
-<span class="tok-kn">import</span> <span class="tok-nn">java.time.Duration</span><span class="tok-p">;</span>
-<span class="tok-kn">import</span> <span class="tok-nn">java.time.temporal.ChronoUnit</span><span class="tok-p">;</span>
-<span class="tok-kn">import</span> <span class="tok-nn">java.time.temporal.TemporalUnit</span><span class="tok-p">;</span>
-<span class="tok-kn">import</span> <span class="tok-nn">java.util.Properties</span><span class="tok-p">;</span>
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
+import java.util.Properties;
 
-<span class="tok-kd">public</span> <span class="tok-kd">class</span> <span class="tok-nc">MyStreams</span> <span class="tok-p">{</span>
-    <span class="tok-kd">public</span> <span class="tok-kd">static</span> <span class="tok-kt">void</span> <span class="tok-nf">main</span><span class="tok-p">(</span><span class="tok-n">String</span><span class="tok-o">[]</span> <span class="tok-n">args</span><span class="tok-p">)</span> <span class="tok-p">{</span>
-        <span class="tok-n">Properties</span> <span class="tok-n">props</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">Properties</span><span class="tok-p">();</span>
+public class MyStreams {
+    public static void main(String[] args) {
+        Properties props = new Properties();
 
-        <span class="tok-n">props</span><span class="tok-p">.</span><span class="tok-na">put</span><span class="tok-p">(</span><span class="tok-n">StreamsConfig</span><span class="tok-p">.</span><span class="tok-na">APPLICATION_ID_CONFIG</span><span class="tok-p">,</span>
-            <span class="tok-s">&quot;my_group&quot;</span><span class="tok-p">);</span>
-        <span class="tok-n">props</span><span class="tok-p">.</span><span class="tok-na">put</span><span class="tok-p">(</span><span class="tok-n">StreamsConfig</span><span class="tok-p">.</span><span class="tok-na">BOOTSTRAP_SERVERS_CONFIG</span><span class="tok-p">,</span>
-            <span class="tok-s">&quot;localhost:9092&quot;</span><span class="tok-p">);</span>
-        <span class="tok-n">props</span><span class="tok-p">.</span><span class="tok-na">put</span><span class="tok-p">(</span><span class="tok-n">StreamsConfig</span><span class="tok-p">.</span><span class="tok-na">DEFAULT_KEY_SERDE_CLASS_CONFIG</span><span class="tok-p">,</span>
-            <span class="tok-n">Serdes</span><span class="tok-p">.</span><span class="tok-na">String</span><span class="tok-p">().</span><span class="tok-na">getClass</span><span class="tok-p">());</span>
-        <span class="tok-n">props</span><span class="tok-p">.</span><span class="tok-na">put</span><span class="tok-p">(</span><span class="tok-n">StreamsConfig</span><span class="tok-p">.</span><span class="tok-na">DEFAULT_VALUE_SERDE_CLASS_CONFIG</span><span class="tok-p">,</span>
-            <span class="tok-n">Serdes</span><span class="tok-p">.</span><span class="tok-na">Integer</span><span class="tok-p">().</span><span class="tok-na">getClass</span><span class="tok-p">());</span>
+        props.put(StreamsConfig.APPLICATION_ID_CONFIG,
+            "my_streams");
+        props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG,
+            "localhost:9092");
+        props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG,
+            Serdes.String().getClass());
+        props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG,
+            Serdes.Integer().getClass());
 
-        <span class="tok-n">StreamsBuilder</span> <span class="tok-n">builder</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">StreamsBuilder</span><span class="tok-p">();</span>
+        StreamsBuilder builder = new StreamsBuilder();
 
-        <span class="tok-n">KStream</span><span class="tok-o">&lt;</span><span class="tok-n">String</span><span class="tok-p">,</span> <span class="tok-n">Integer</span><span class="tok-o">&gt;</span> <span class="tok-n">stream</span> <span class="tok-o">=</span>
-            <span class="tok-n">builder</span><span class="tok-p">.</span><span class="tok-na">stream</span><span class="tok-p">(</span><span class="tok-s">&quot;my_orders&quot;</span><span class="tok-p">);</span> <span class="tok-c1">//Key: State, Value: Amount</span>
+        KStream<String, Integer> stream =
+            builder.stream("my_orders"); //Key: State, Value: Amount
 
-        <span class="tok-c1">//One branch</span>
-        <span class="tok-n">stream</span><span class="tok-p">.</span><span class="tok-na">filter</span><span class="tok-p">((</span><span class="tok-n">key</span><span class="tok-p">,</span> <span class="tok-n">value</span><span class="tok-p">)</span> <span class="tok-o">-&gt;</span> <span class="tok-n">key</span><span class="tok-p">.</span><span class="tok-na">equals</span><span class="tok-p">(</span><span class="tok-s">&quot;CA&quot;</span><span class="tok-p">))</span>
-              <span class="tok-p">.</span><span class="tok-na">to</span><span class="tok-p">(</span><span class="tok-s">&quot;priority_state_orders&quot;</span><span class="tok-p">);</span>
+        //One branch
+        stream.filter((key, value) -> key.equals("CA"))
+              .to("priority_state_orders");
 
-        <span class="tok-c1">//Second branch</span>
-        <span class="tok-n">stream</span><span class="tok-p">.</span><span class="tok-na">groupByKey</span><span class="tok-p">()</span>
-              <span class="tok-p">.</span><span class="tok-na">count</span><span class="tok-p">()</span>
-              <span class="tok-p">.</span><span class="tok-na">toStream</span><span class="tok-p">()</span>
-              <span class="tok-p">.</span><span class="tok-na">peek</span><span class="tok-p">((</span><span class="tok-n">key</span><span class="tok-p">,</span> <span class="tok-n">value</span><span class="tok-p">)</span> <span class="tok-o">-&gt;</span>
-                  <span class="tok-n">System</span><span class="tok-p">.</span><span class="tok-na">out</span><span class="tok-p">.</span><span class="tok-na">printf</span><span class="tok-p">(</span><span class="tok-s">&quot;key: %s, value %d&quot;</span><span class="tok-p">,</span> <span class="tok-n">key</span><span class="tok-p">,</span> <span class="tok-n">value</span><span class="tok-p">))</span>
-              <span class="tok-p">.</span><span class="tok-na">to</span><span class="tok-p">(</span><span class="tok-s">&quot;state_orders_count&quot;</span><span class="tok-p">,</span>
-                  <span class="tok-n">Produced</span><span class="tok-p">.</span><span class="tok-na">with</span><span class="tok-p">(</span><span class="tok-n">Serdes</span><span class="tok-p">.</span><span class="tok-na">String</span><span class="tok-p">(),</span> <span class="tok-n">Serdes</span><span class="tok-p">.</span><span class="tok-na">Long</span><span class="tok-p">()));</span>
+        //Second branch
+        stream.groupByKey()
+              .count()
+              .toStream()
+              .peek((key, value) ->
+                  System.out.printf("key: %s, value %d", key, value))
+              .to("state_orders_count",
+                  Produced.with(Serdes.String(), Serdes.Long()));
 
 
-        <span class="tok-n">Topology</span> <span class="tok-n">topology</span> <span class="tok-o">=</span> <span class="tok-n">builder</span><span class="tok-p">.</span><span class="tok-na">build</span><span class="tok-p">();</span>
+        Topology topology = builder.build();
 
-        <span class="tok-n">KafkaStreams</span> <span class="tok-n">streams</span> <span class="tok-o">=</span> <span class="tok-k">new</span> <span class="tok-n">KafkaStreams</span><span class="tok-p">(</span><span class="tok-n">topology</span><span class="tok-p">,</span> <span class="tok-n">props</span><span class="tok-p">);</span>
+        KafkaStreams streams = new KafkaStreams(topology, props);
 
-        <span class="tok-n">streams</span><span class="tok-p">.</span><span class="tok-na">setUncaughtExceptionHandler</span><span class="tok-p">((</span><span class="tok-n">t</span><span class="tok-p">,</span> <span class="tok-n">e</span><span class="tok-p">)</span> <span class="tok-o">-&gt;</span> <span class="tok-n">e</span><span class="tok-p">.</span><span class="tok-na">printStackTrace</span><span class="tok-p">());</span>
+        streams.setUncaughtExceptionHandler((t, e) -> e.printStackTrace());
 
-        <span class="tok-n">streams</span><span class="tok-p">.</span><span class="tok-na">start</span><span class="tok-p">();</span>
+        streams.start();
 
-        <span class="tok-n">Runtime</span><span class="tok-p">.</span><span class="tok-na">getRuntime</span><span class="tok-p">().</span><span class="tok-na">addShutdownHook</span><span class="tok-p">(</span><span class="tok-k">new</span> <span class="tok-n">Thread</span><span class="tok-p">(</span><span class="tok-n">streams</span><span class="tok-p">::</span><span class="tok-n">close</span><span class="tok-p">));</span>
-    <span class="tok-p">}</span>
-<span class="tok-p">}</span></code></pre>
+        Runtime.getRuntime().addShutdownHook(new Thread(streams::close));
+    }
+}</code></pre>
 </div>
 </div>
 </li>
@@ -948,7 +935,7 @@ listens to <code>priority_state_orders</code>. You may also want to shorten
 the sleep time so that more orders come in.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="sh"><span></span>./bin/kafka-console-consumer <span class="tok-se">\</span>
+<pre class="pygments highlight"><code data-lang="sh"><span></span>kafka-console-consumer <span class="tok-se">\</span>
   --bootstrap-server localhost:9092 <span class="tok-se">\</span>
   --topic priority_state_orders --from-beginning <span class="tok-se">\</span>
   --key-deserializer org.apache.kafka.common.serialization.StringDeserializer <span class="tok-se">\</span>
@@ -962,7 +949,7 @@ the sleep time so that more orders come in.</p>
 <p>Run <code>kafka_console_consumer</code> that listens to <code>state_orders_count</code></p>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="sh"><span></span>./bin/kafka-console-consumer <span class="tok-se">\</span>
+<pre class="pygments highlight"><code data-lang="sh"><span></span>kafka-console-consumer <span class="tok-se">\</span>
 --bootstrap-server localhost:9092 <span class="tok-se">\</span>
   --topic state_orders_count --from-beginning <span class="tok-se">\</span>
   --key-deserializer org.apache.kafka.common.serialization.StringDeserializer <span class="tok-se">\</span>
@@ -1137,11 +1124,14 @@ of <code>com.xyzcorp</code> with the following content</p>
 </div>
 </li>
 <li>
-<p>Run <code>MyAvroProducer</code> and ensure that the information is in
-the <code>my_avro_orders</code> topic using <code>kafka-avro-console-consumer</code> resident in the <code>broker</code> container</p>
+<p>Run <code>MyAvroProducer</code></p>
+</li>
+<li>
+<p>Go to the <code>schema-registry</code> container, right click and select "Attach Shell", and once in the shell run the
+following to ensure that the data is being processed</p>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="sh"><span></span>./kafka-avro-console-consumer <span class="tok-se">\</span>
+<pre class="pygments highlight"><code data-lang="sh"><span></span>kafka-avro-console-consumer <span class="tok-se">\</span>
 --bootstrap-server localhost:9092 <span class="tok-se">\</span>
 --topic my_avro_orders --from-beginning <span class="tok-se">\</span>
 --key-deserializer <span class="tok-se">\</span>
@@ -1162,7 +1152,7 @@ the <code>my_avro_orders</code> topic using <code>kafka-avro-console-consumer</c
 </div>
 </div>
 <div class="sect1">
-<h2 id="_lab_using_ksql">Lab: Using KSQL</h2>
+<h2 id="_lab_using_ksqldb">Lab: Using KSQLDB</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -1189,7 +1179,7 @@ gender VARCHAR) WITH (kafka_topic=&#39;my_avro_orders&#39;, value_format=&#39;AV
 </div>
 </li>
 <li>
-<p>Ensure that your stream is available when you call <code>SHOW STREAMS:</code></p>
+<p>Ensure that your stream is available when you call <code>SHOW STREAMS;</code></p>
 </li>
 <li>
 <p>In KSQL, add <code>SET 'auto.offset.reset'='earliest';</code>
@@ -1197,7 +1187,7 @@ so that you can start processing all information.</p>
 </li>
 <li>
 <p>Give ksql for a spin with a non-persistent query
-using <code>SELECT * from my_avro_orders;</code></p>
+using <code>SELECT * from my_avro_orders emit changes;</code></p>
 </li>
 <li>
 <p>Using KSQL, create another non-persistent query that selects
@@ -1213,12 +1203,11 @@ query above works, turn it into a persistent <em>table</em> query and persist th
 a topic called <code>next_day_shipping_by_state</code></p>
 </li>
 <li>
-<p>On a new terminal, enter the following at the command line in the <em>confluent-5.0.0</em>
-directory to view your results</p>
+<p>Go to the <code>schema-registry</code> container, right click and select "Attach Shell", and once in the shell run the following</p>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="sh"><span></span>./bin/kafka-avro-console-consumer <span class="tok-se">\</span>
-  --bootstrap-server localhost:9092 <span class="tok-se">\</span>
+<pre class="pygments highlight"><code data-lang="sh"><span></span>kafka-avro-console-consumer <span class="tok-se">\</span>
+  --bootstrap-server broker:9092 <span class="tok-se">\</span>
   --topic next_day_shipping_by_state <span class="tok-se">\</span>
   --from-beginning <span class="tok-se">\</span>
   --key-deserializer org.apache.kafka.common.serialization.StringDeserializer <span class="tok-se">\</span>
@@ -1247,7 +1236,7 @@ the query identifier for the persistent query you just ran, then call
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-11-15 14:40:30 -0700
+Last updated 2023-07-02 13:11:35 -0600
 </div>
 </div>
 </body>
