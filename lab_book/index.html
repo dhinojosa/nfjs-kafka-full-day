@@ -892,8 +892,8 @@ package with the following content</p>
 <pre class="pygments highlight"><code data-lang="java"><span></span><span class="tok-kn">package</span><span class="tok-w"> </span><span class="tok-nn">com.xyzcorp</span><span class="tok-p">;</span>
 
 <span class="tok-kn">import</span><span class="tok-w"> </span><span class="tok-nn">org.apache.kafka.common.serialization.Serdes</span><span class="tok-p">;</span>
-<span class="tok-kn">import</span><span class="tok-w"> </span><span class="tok-nn">org.apache.kafka.streams.</span><span class="tok-o">&lt;</span><span class="tok-n">strong</span><span class="tok-o">&gt;</span><span class="tok-p">;</span>
-<span class="tok-kn">import</span><span class="tok-w"> </span><span class="tok-nn">org.apache.kafka.streams.kstream.</span><span class="tok-o">&lt;/</span><span class="tok-n">strong</span><span class="tok-o">&gt;</span><span class="tok-p">;</span>
+<span class="tok-kn">import</span><span class="tok-w"> </span><span class="tok-nn">org.apache.kafka.streams.</span>*<span class="tok-p">;</span>
+<span class="tok-kn">import</span><span class="tok-w"> </span><span class="tok-nn">org.apache.kafka.streams.kstream.</span>*<span class="tok-p">;</span>
 
 <span class="tok-kn">import</span><span class="tok-w"> </span><span class="tok-nn">java.time.Duration</span><span class="tok-p">;</span>
 <span class="tok-kn">import</span><span class="tok-w"> </span><span class="tok-nn">java.time.temporal.ChronoUnit</span><span class="tok-p">;</span>
@@ -1193,7 +1193,7 @@ the <code>my_avro_orders</code> topic using <code>kafka-avro-console-consumer</c
 <div class="content">
 <pre class="pygments highlight"><code data-lang="ksql"><span></span>CREATE STREAM my_avro_orders \
 (total BIGINT, shipping VARCHAR, state VARCHAR, discount DOUBLE, \
-gender VARCHAR) WITH (kafka_topic=&#39;my-avro-orders&#39;, value_format=&#39;AVRO&#39;);</code></pre>
+gender VARCHAR) WITH (kafka_topic=&#39;my_avro_orders&#39;, value_format=&#39;AVRO&#39;);</code></pre>
 </div>
 </div>
 </li>
