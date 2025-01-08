@@ -33,6 +33,9 @@ public class MyProducer {
         //properties.put(ProducerConfig.LINGER_MS_CONFIG, 500); // how long do want the batch to wait on the producer set.
         //properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "snappy"); //mulitple messages in one batch and compress them. 
 
+        //custom partitioner
+        //properties.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, "com.xyzcorp.MyPartitioner");
+
         try (KafkaProducer<String, Integer> producer = new KafkaProducer<>(properties)) {
             String stateString =
                 "AK,AL,AZ,AR,CA,CO,CT,DE,FL,GA," +
@@ -85,7 +88,7 @@ public class MyProducer {
                     }
                 });
 
-                Thread.sleep(random.nextInt(3000 - 100 + 1) + 2000);
+                Thread.sleep(random.nextInt(3000 - 100 + 1) + 1000);
             }
         } 
     }
