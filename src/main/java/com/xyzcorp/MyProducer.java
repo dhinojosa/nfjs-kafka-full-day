@@ -22,7 +22,7 @@ public class MyProducer {
         properties.put(ProducerConfig.ACKS_CONFIG, "all"); //0 maybe once, 1 exactly once, "all" every message
         properties.put(ProducerConfig.RETRIES_CONFIG, 100);
         properties.put(ProducerConfig.RETRY_BACKOFF_MS_CONFIG, 250);
-        properties.put(ProducerConfig.DELIVERY_TIMEOUT_MS_CONFIG, 2000); // a message better make it there in 2s. if it doesnt get there, we will call it off and Exception
+        //properties.put(ProducerConfig.DELIVERY_TIMEOUT_MS_CONFIG, 2000); // a message better make it there in 2s. if it doesnt get there, we will call it off and Exception
 
         //1. de-deplicate any duplicates
         //2. guarentee order delivery of message to kafka
@@ -85,7 +85,7 @@ public class MyProducer {
                     }
                 });
 
-                Thread.sleep(random.nextInt(3000 - 1000 + 1) + 100);
+                Thread.sleep(random.nextInt(3000 - 100 + 1) + 2000);
             }
         } 
     }
