@@ -22,12 +22,16 @@ public class MyProducer {
         properties.put(ProducerConfig.ACKS_CONFIG, "all"); //0 maybe once, 1 exactly once, "all" every message
         properties.put(ProducerConfig.RETRIES_CONFIG, 100);
         properties.put(ProducerConfig.RETRY_BACKOFF_MS_CONFIG, 250);
+        properties.put(ProducerConfig.DELIVERY_TIMEOUT_MS_CONFIG, 2000); // a message better make it there in 2s. if it doesnt get there, we will call it off and Exception
 
         //1. de-deplicate any duplicates
         //2. guarentee order delivery of message to kafka
         //3. there is no performance penalty
         //in the meta data, it contrains the producer id (pid), and the sequence id, 
         properties.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, "true");
+        //properties.put(ProducerConfig.BATCH_SIZE_CONFIG, 1000); //how big is your batch in bytes
+        //properties.put(ProducerConfig.LINGER_MS_CONFIG, 500); // how long do want the batch to wait on the producer set.
+        //properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "snappy"); //mulitple messages in one batch and compress them. 
 
         try (KafkaProducer<String, Integer> producer = new KafkaProducer<>(properties)) {
             String stateString =
