@@ -14,13 +14,20 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class MyProducer {
     @SuppressWarnings("Duplicates")
     public static void main(String[] args) throws InterruptedException {
-        Properties properties = new Properties();
-        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,
-            "localhost:9092");
-        properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
-            StringSerializer.class);
-        properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
-            IntegerSerializer.class);
+        final Properties properties = new Properties();
+
+        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, IntegerSerializer.class);
+        properties.put(ProducerConfig.ACKS_CONFIG, "all"); //0 maybe once, 1 exactly once, "all" every message
+        properties.put(ProducerConfig.RETRIES_CONFIG, 100);
+        properties.put(ProducerConfig.RETRY_BACKOFF_MS_CONFIG, 250);
+
+        //1. de-deplicate any duplicates
+        //2. guarentee order delivery of message to kafka
+        //3. there is no performance penalty
+        //in the meta data, it contrains the producer id (pid), and the sequence id, 
+        properties.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, "true");
 
         try (KafkaProducer<String, Integer> producer = new KafkaProducer<>(properties)) {
             String stateString =
